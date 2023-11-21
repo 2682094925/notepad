@@ -24,6 +24,11 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
+    <toolWindow id="随心记"
+                secondary="true"
+                anchor="right" factoryClass="com.rhl.plugin.notepad.window.NoteListWindowFactory">
+
+    </toolWindow>
   </extensions>
 
   <actions>
