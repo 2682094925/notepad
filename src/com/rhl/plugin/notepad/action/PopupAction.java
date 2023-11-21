@@ -5,6 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
+import com.rhl.plugin.notepad.dialog.AddNoteDialog;
 
 /**
  * @Auther: 你的昵称是抢我的
@@ -21,5 +22,9 @@ public class PopupAction extends AnAction {
         SelectionModel selectionModel = editor.getSelectionModel();
         //获取当前选择的文本
         String selectedText = selectionModel.getSelectedText();
+
+        //触发对话框
+        AddNoteDialog dialog = new AddNoteDialog();
+        dialog.show();
     }
 }
