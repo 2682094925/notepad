@@ -2,6 +2,7 @@ package com.rhl.plugin.notepad.window;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
+import com.rhl.plugin.notepad.data.DataCenter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,9 +22,15 @@ public class NoteListWindow {
     private JButton clearBtn;
     private JButton closeBtn;
     private JTextField textField1;
-    private JTable table1;
+    private JTable contentTable;
+
+    private void init(){
+        contentTable.setModel(DataCenter.TABLE_MODEL);
+        contentTable.setEnabled(true);
+    }
 
     public NoteListWindow(Project project, ToolWindow toolWindow) {
+        init();
         generateBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -1,11 +1,15 @@
 package com.rhl.plugin.notepad.dialog;
 
+import com.intellij.openapi.graph.layout.hierarchic.incremental.NodeData;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.EditorTextField;
+import com.rhl.plugin.notepad.data.DataCenter;
+import com.rhl.plugin.notepad.data.NoteData;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.Instant;
 
 public class AddNoteDialog extends DialogWrapper {
     /**
@@ -46,6 +50,19 @@ public class AddNoteDialog extends DialogWrapper {
             String title = etfTitle.getText();
             //获取内容
             String content = etfMark.getText();
+
+            //获取后缀
+            String fileType = DataCenter.CURRENT_FILE_NAME.substring(DataCenter.CURRENT_FILE_NAME.lastIndexOf(".") + 1);
+
+            long id = Instant.now().toEpochMilli();
+
+            NoteData noteData = new NoteData(id, title, content, DataCenter.SELECTED_TEXT, DataCenter.CURRENT_FILE_NAME, fileType);
+
+
+            DataCenter.NOTE_LIST.add(noteData);
+            DataCenter.TABLE_MODEL.addRow(noteData.toStringArray());
+
+
         });
         panel.add(btnAdd);
         return panel;

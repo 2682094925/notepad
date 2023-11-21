@@ -1,5 +1,6 @@
 package com.rhl.plugin.notepad.data;
 
+import javax.swing.table.DefaultTableModel;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,6 +27,12 @@ public class DataCenter {
      * 笔记列表集合
      */
     public static List<NoteData> NOTE_LIST = new LinkedList<>();
+
+
+    private static String[] COLUMN_NAME={"主键","标题","备注","文件名","代码段","添加时间"};
+
+    public static DefaultTableModel TABLE_MODEL = new DefaultTableModel(null,COLUMN_NAME);
+
 
     /**
      * 根据主键进行删除

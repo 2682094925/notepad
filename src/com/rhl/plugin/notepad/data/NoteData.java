@@ -41,7 +41,16 @@ public class NoteData implements Serializable {
       /**
        * 添加时间
        */
-      private String addTime;
+      private String addTime = DateUtils.format(new Date());
+
+      public NoteData(Long id, String title, String mark, String content, String fileName, String fileType) {
+            this.id = id;
+            this.title = title;
+            this.mark = mark;
+            this.content = content;
+            this.fileName = fileName;
+            this.fileType = fileType;
+      }
 
       public Long getId() {
             return id;
@@ -92,10 +101,14 @@ public class NoteData implements Serializable {
       }
 
       public String getAddTime() {
-            return DateUtils.format(new Date());
+            return addTime;
       }
 
       public void setAddTime(String addTime) {
             this.addTime = addTime;
+      }
+
+      public String[] toStringArray() {
+            return new String[]{String.valueOf(this.id),this.title,this.mark,this.fileName,this.content,this.addTime};
       }
 }
