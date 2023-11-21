@@ -8,7 +8,7 @@ import java.util.List;
  * @Date: 2023/11/21 21:50
  * @Description: 存放数据 上下文
  */
-public class DataCentrer {
+public class DataCenter {
 
     /**
      * 选择的文本
