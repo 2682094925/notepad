@@ -1,17 +1,16 @@
 <idea-plugin>
   <id>com.rhl.plugin.notepad.id</id>
-  <name>你的昵称是抢我的</name>
+  <name>随心记</name>
   <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <vendor email="2682094925@qq.com" url="">你的昵称是抢我的</vendor>
 
   <description><![CDATA[
       在看源码的时候，可以整理笔记<br>
-      <em>参考: </em>
+      <em></em>
     ]]></description>
 
   <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+
     ]]>
   </change-notes>
 
