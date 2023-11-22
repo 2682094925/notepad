@@ -1,8 +1,14 @@
 package com.rhl.plugin.notepad.window;
 
+import com.intellij.openapi.fileChooser.FileChooser;
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.wm.ToolWindow;
 import com.rhl.plugin.notepad.data.DataCenter;
+import com.rhl.plugin.notepad.util.MDUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,7 +27,7 @@ public class NoteListWindow {
     private JButton generateBtn;
     private JButton clearBtn;
     private JButton closeBtn;
-    private JTextField textField1;
+    private JTextField titleField;
     private JTable contentTable;
     private JButton removeBtn;
 
@@ -38,6 +44,22 @@ public class NoteListWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                String title = titleField.getText();
+                if (StringUtils.isBlank(title)){
+                   /* MessageDialogBuilder.yesNo("操作结果","标题不能为空").();*/
+//                    Messages.showYesNoDialog("标题不能为空", title, Messages.getQuestionIcon());
+                    Messages.showErrorDialog("标题不能为空", title);
+                    return;
+                }
+
+                String fileName = title+".md";
+
+                VirtualFile virtualFile = FileChooser.chooseFile(FileChooserDescriptorFactory.createSingleFolderDescriptor(), project, project.getBaseDir());
+                if(virtualFile!=null){
+                    String path = virtualFile.getPath();
+                    String fileFullPath = path + "/" + fileName;
+                    MDUtils.generateMarkdownDocument(title,fileFullPath,DataCenter.NOTE_LIST);
+                }
             }
         });
         //清空列表
