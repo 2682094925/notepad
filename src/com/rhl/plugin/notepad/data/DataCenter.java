@@ -1,6 +1,7 @@
 package com.rhl.plugin.notepad.data;
 
 import javax.swing.table.DefaultTableModel;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,41 +48,20 @@ public class DataCenter {
 
     /**
      * 根据主键进行删除
-     * @param id
+     * @param indexs
      * @return
      */
-    public static boolean remove(Long id) {
+    public static void removeAll(List<Integer> indexs) {
         //判断当前中心里有没有数据
-        if (NOTE_LIST.isEmpty()) {
-            return Boolean.FALSE;
+        if (NOTE_LIST.isEmpty() || indexs == null || indexs.isEmpty()) {
+            return;
         }
-        //根据ID查找当前元素
-        NoteData target = findById(id);
-
-        //没有找到直接返回 false
-        if (target == null){
-            return Boolean.FALSE;
+        //对要删除的索引进行倒排序
+        Collections.sort(indexs, Collections.reverseOrder());
+        // 根据下标批量删除元素
+        for (int index : indexs) {
+            NOTE_LIST.remove(index);
         }
-
-        // 移除
-        return NOTE_LIST.remove(target);
-    }
-
-    /**
-     * 根据ID进行查找
-     *
-     * @param id
-     * @return
-     */
-    private static NoteData findById(Long id) {
-        NoteData target = null;
-        for (NoteData note : NOTE_LIST) {
-            if (note.getId().equals(id)) {
-                target = note;
-                break;
-            }
-        }
-        return target;
     }
 
 }

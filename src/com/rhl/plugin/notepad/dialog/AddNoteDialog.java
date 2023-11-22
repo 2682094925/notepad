@@ -5,6 +5,7 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.EditorTextField;
 import com.rhl.plugin.notepad.data.DataCenter;
 import com.rhl.plugin.notepad.data.NoteData;
+import com.rhl.plugin.notepad.window.NoteListWindowFactory;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -67,6 +68,11 @@ public class AddNoteDialog extends DialogWrapper {
             DataCenter.CURRENT_FILE_NAME =null;
             DataCenter.SELECTED_TEXT =null;
             DataCenter.CURRENT_FILE_TYPE =null;
+
+            //打开列表
+
+            NoteListWindowFactory.show();
+
         });
         panel.add(btnAdd);
         return panel;

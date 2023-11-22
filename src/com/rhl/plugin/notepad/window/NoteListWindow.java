@@ -13,6 +13,9 @@ import org.apache.commons.lang3.StringUtils;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @Auther: 你的昵称是抢我的
@@ -32,7 +35,7 @@ public class NoteListWindow {
     private JButton removeBtn;
 
 
-    private void init(){
+    private void init() {
         contentTable.setModel(DataCenter.TABLE_MODEL);
         contentTable.setEnabled(true);
     }
@@ -45,20 +48,20 @@ public class NoteListWindow {
             public void actionPerformed(ActionEvent e) {
 
                 String title = titleField.getText();
-                if (StringUtils.isBlank(title)){
-                   /* MessageDialogBuilder.yesNo("操作结果","标题不能为空").();*/
+                if (StringUtils.isBlank(title)) {
+                    /* MessageDialogBuilder.yesNo("操作结果","标题不能为空").();*/
 //                    Messages.showYesNoDialog("标题不能为空", title, Messages.getQuestionIcon());
                     Messages.showErrorDialog("标题不能为空", title);
                     return;
                 }
 
-                String fileName = title+".md";
+                String fileName = title + ".md";
 
                 VirtualFile virtualFile = FileChooser.chooseFile(FileChooserDescriptorFactory.createSingleFolderDescriptor(), project, project.getBaseDir());
-                if(virtualFile!=null){
+                if (virtualFile != null) {
                     String path = virtualFile.getPath();
                     String fileFullPath = path + "/" + fileName;
-                    MDUtils.generateMarkdownDocument(title,fileFullPath,DataCenter.NOTE_LIST);
+                    MDUtils.generateMarkdownDocument(title, fileFullPath, DataCenter.NOTE_LIST);
                 }
             }
         });
@@ -67,6 +70,7 @@ public class NoteListWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DataCenter.reset();
+                Messages.showInfoMessage("清除成功", "操作结果");
             }
         });
         //关闭
@@ -82,9 +86,26 @@ public class NoteListWindow {
             public void actionPerformed(ActionEvent e) {
                 //这里拿到的是索引 假如存在分页情况的下 会导致数据不正确
                 int[] selectedRows = contentTable.getSelectedRows();
+                if (selectedRows.length <= 0){
+                    Messages.showErrorDialog("未选择任何数据","操作结果");
+                    return;
+                }
+                int result = Messages.showYesNoDialog(String.format("确定要删除选中的数据吗?"), "删除", Messages.getQuestionIcon());
+                if (result == Messages.YES) {
+                    List<Integer> indexs = new ArrayList<>(selectedRows.length);
+                    for (int selectedRow : selectedRows) {
+                        indexs.add(selectedRow);
+                    }
 
-                //TODO 这里的话 要先提示
+                    //这里要是用倒叙删除 否则 会下标越界异常
+                    Collections.sort(indexs, Collections.reverseOrder());
+                    for (Integer selectedRow : indexs) {
+                        DataCenter.TABLE_MODEL.removeRow(selectedRow);
+                    }
 
+                    DataCenter.removeAll(indexs);
+                    Messages.showInfoMessage("删除成功", "操作结果");
+                }
             }
         });
     }
