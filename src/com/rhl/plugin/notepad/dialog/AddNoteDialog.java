@@ -62,7 +62,11 @@ public class AddNoteDialog extends DialogWrapper {
             DataCenter.NOTE_LIST.add(noteData);
             DataCenter.TABLE_MODEL.addRow(noteData.toStringArray());
 
-
+            //这里关闭对话框 并将当前文件信息清空
+            AddNoteDialog.this.dispose();
+            DataCenter.CURRENT_FILE_NAME =null;
+            DataCenter.SELECTED_TEXT =null;
+            DataCenter.CURRENT_FILE_TYPE =null;
         });
         panel.add(btnAdd);
         return panel;

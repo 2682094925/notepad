@@ -26,13 +26,24 @@ public class DataCenter {
     /**
      * 笔记列表集合
      */
-    public static List<NoteData> NOTE_LIST = new LinkedList<>();
+    public final static List<NoteData> NOTE_LIST = new LinkedList<>();
 
 
-    private static String[] COLUMN_NAME={"主键","标题","备注","文件名","代码段","添加时间"};
+    private static String[] COLUMN_NAME={"标题","备注","文件名","代码段","添加时间"};
 
     public static DefaultTableModel TABLE_MODEL = new DefaultTableModel(null,COLUMN_NAME);
 
+
+    /**
+     * 重置
+     */
+    public static void reset(){
+        TABLE_MODEL.setDataVector(null,COLUMN_NAME);
+        NOTE_LIST.clear();
+        SELECTED_TEXT = null;
+        CURRENT_FILE_TYPE = null;
+        CURRENT_FILE_NAME = null;
+    }
 
     /**
      * 根据主键进行删除

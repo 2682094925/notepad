@@ -109,6 +109,6 @@ public class NoteData implements Serializable {
       }
 
       public String[] toStringArray() {
-            return new String[]{String.valueOf(this.id),this.title,this.mark,this.fileName,this.content,this.addTime};
+            return new String[]{this.title,this.mark,this.fileName,this.content,this.addTime};
       }
 }

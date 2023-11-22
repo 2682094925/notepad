@@ -27,6 +27,12 @@
               <text value="清空列表列表"/>
             </properties>
           </component>
+          <component id="17a78" class="javax.swing.JButton" binding="removeBtn">
+            <constraints/>
+            <properties>
+              <text value="移除"/>
+            </properties>
+          </component>
           <component id="fdc2b" class="javax.swing.JButton" binding="closeBtn">
             <constraints/>
             <properties>
