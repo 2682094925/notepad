@@ -69,10 +69,6 @@ public class AddNoteDialog extends DialogWrapper {
             DataCenter.SELECTED_TEXT =null;
             DataCenter.CURRENT_FILE_TYPE =null;
 
-            //打开列表
-
-            NoteListWindowFactory.show();
-
         });
         panel.add(btnAdd);
         return panel;

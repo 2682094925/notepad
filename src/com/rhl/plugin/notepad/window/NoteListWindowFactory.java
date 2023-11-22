@@ -13,9 +13,6 @@ import org.jetbrains.annotations.NotNull;
  * @Description:
  */
 public class NoteListWindowFactory  implements ToolWindowFactory {
-
-    private static  ToolWindow toolWindow = null;
-
     @Override
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
         //创建出NoteListWindow对象
@@ -26,25 +23,5 @@ public class NoteListWindowFactory  implements ToolWindowFactory {
         Content content = contentFactory.createContent(noteListWindow.getContent(), "", false);
         //给toolWindow设置内容
         toolWindow.getContentManager().addContent(content);
-        NoteListWindowFactory.toolWindow = toolWindow;
     }
-
-    /**
-     * 打开
-     */
-    public static void show(){
-        if (toolWindow != null){
-            toolWindow.show(null);
-        }
-    }
-
-    /**
-     * 隐藏
-     */
-    public static void hide(){
-        if (toolWindow != null){
-            toolWindow.hide(null);
-        }
-    }
-
 }
