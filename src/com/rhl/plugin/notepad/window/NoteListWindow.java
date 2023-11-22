@@ -69,8 +69,12 @@ public class NoteListWindow {
         clearBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DataCenter.reset();
-                Messages.showInfoMessage("清除成功", "操作结果");
+
+                int result = Messages.showYesNoDialog(String.format("确定要清空列表吗?"), "清空", Messages.getQuestionIcon());
+                if (result == Messages.YES) {
+                    DataCenter.reset();
+                    Messages.showInfoMessage("清除成功", "操作结果");
+                }
             }
         });
         //关闭
