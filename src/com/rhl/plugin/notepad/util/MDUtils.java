@@ -28,8 +28,10 @@ public class MDUtils {
        String topic = String.format("## %s\n[TOC]\n", title);
        String template =
               "### %s\n" +
-              "- %s\n" +
-              "- %s\n" +
+              "##### 笔记内容\n" +
+              "` %s `\n" +
+              "##### 文件名称\n" +
+              "` %s `\n" +
               "``` %s\n" +
               "%s\n" +
               "```";
