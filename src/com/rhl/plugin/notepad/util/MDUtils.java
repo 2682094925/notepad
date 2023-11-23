@@ -41,7 +41,7 @@ public class MDUtils {
        for (NoteData noteData : noteList) {
            markdownContent += "\n" + String.format(template,
                    noteData.getTitle(),
-                   noteData.getMark(),
+                   format(noteData.getMark(),66),
                    noteData.getFileName(),
                    noteData.getFileType(),
                    noteData.getContent()
@@ -60,5 +60,46 @@ public class MDUtils {
            Messages.showErrorDialog("生成文档出错: "+e.getMessage(), title);
        }
 
+   }
+
+    /**
+     * 格式化字符串
+     * @param source
+     * @param length
+     * @return
+     */
+   public static String format(String source,int length){
+       if (length <= 0) {
+           throw new IllegalArgumentException("Length must be greater than 0");
+       }
+
+       source = source.replaceAll("(\\n{2,})", "\n");
+       StringBuilder result = new StringBuilder();
+       StringBuilder line = new StringBuilder();
+       int index = 0;
+       while (index < source.length()) {
+           char currentChar = source.charAt(index);
+           line.append(currentChar);
+           if (currentChar == ' ' || currentChar == ',' || currentChar == '.' || currentChar == ';' || currentChar == ':') {
+               // 如果当前字符是空格或标点符号，尝试将下一个字符也放在当前行
+               if (index < source.length() - 1) {
+                   char nextChar = source.charAt(index + 1);
+                   if (nextChar != ' ' && nextChar != ',' && nextChar != '.' && nextChar != ';' && nextChar != ':') {
+                       line.append(nextChar);
+                       index++;
+                   }
+               }
+           }
+
+           if (line.length() >= length || index == source.length() - 1) {
+               // 当行长度达到指定长度，或已遍历到字符串末尾时，将当前行添加到结果中，并重置当前行
+               result.append(line).append("\n");
+               line.setLength(0);
+           }
+
+           index++;
+       }
+
+       return result.toString();
    }
 }
