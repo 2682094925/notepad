@@ -3,6 +3,7 @@ package com.rhl.plugin.notepad.dialog;
 import com.intellij.openapi.graph.layout.hierarchic.incremental.NodeData;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.EditorTextField;
+import com.intellij.ui.components.JBScrollPane;
 import com.rhl.plugin.notepad.data.DataCenter;
 import com.rhl.plugin.notepad.data.NoteData;
 import com.rhl.plugin.notepad.window.NoteListWindowFactory;
@@ -35,6 +36,7 @@ public class AddNoteDialog extends DialogWrapper {
         JPanel panel = new JPanel(new BorderLayout());
         etfTitle = new EditorTextField("笔记标题");
         etfMark = new EditorTextField("笔记内容");
+        etfMark.setOneLineMode(false);
         etfMark.setPreferredSize(new Dimension(200,100));
         panel.add(etfTitle, BorderLayout.NORTH);
         panel.add(etfMark, BorderLayout.CENTER);
